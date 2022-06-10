@@ -5,6 +5,8 @@ import hashlib
 import base64
 import secrets
 
+#not memory safe, constant time, etc. do not use on public computers
+
 #Define helper functions for RC6
 # rotate right input x, by n bits
 def ROR(x, n, bits=32):
@@ -117,16 +119,3 @@ ciphertext = bytearray(rc6encrypt(key, plaintext))
 
 print ("Elapsed Time:", time.time()-timed)
 print ("Encrypted Text:", base64.b64encode(ciphertext+salt).decode('utf-8'))
-
-#Clear memory
-for i in range(len(plaintext)):
-    plaintext[i] = 0
-for i in range(len(password)):
-    password[i] = 0
-for i in range(len(salt)):
-    salt[i] = 0
-for i in range(len(key)):
-    key[i] = 0
-for i in range(len(ciphertext)):
-    ciphertext[i] = 0
-
