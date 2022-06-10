@@ -5,6 +5,8 @@ import hashlib
 import base64
 import secrets
 
+#not memory safe, constant time, etc. do not use on public computers
+
 #Define helper functions for RC6
 # rotate right input x, by n bits
 def ROR(x, n, bits=32):
