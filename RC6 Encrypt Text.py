@@ -94,7 +94,7 @@ def rc6countermode(key, length = 16):
         okm = b""
         for i in range(ceil(length / blocklength)):
             counter = b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
-            nonceinteger = int.from_bytes(counter, 'big')
+            nonceinteger = int.from_bytes(counter, 'little')
             nonceinteger += i
             iteratednonce = (nonceinteger).to_bytes(16, byteorder='little')
             t = bytearray(RC6Encrypt(iteratednonce, key))
