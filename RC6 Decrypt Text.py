@@ -87,16 +87,16 @@ def RC6Encrypt(data, key):
 
 #Encrypt iterating counter in multiple blocks. Note: There is no nonce, each key is different due to salt appended
 def rc6countermode(key, length = 16):
-        hash_len = 16
+        blocklength = 16
         newkey = generateKey(key)
         length = int(length)
         t = b""
         okm = b""
-        for i in range(ceil(length / hash_len)):
+        for i in range(ceil(length / blocklength)):
             counter = b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
-            nonceinteger = int.from_bytes(counter, 'big')
+            nonceinteger = int.from_bytes(counter, 'little')
             nonceinteger += i
-            iteratednonce = (nonceinteger).to_bytes(16, byteorder='big')
+            iteratednonce = (nonceinteger).to_bytes(16, byteorder='little')
             t = bytearray(RC6Encrypt(iteratednonce, key))
             okm += t
         return bytearray(okm[:length])
